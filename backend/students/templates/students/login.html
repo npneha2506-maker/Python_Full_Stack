@@ -1,145 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Django Student Login</title>
+    <title>User Registration</title>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: Arial, sans-serif;
-            height: 100vh;
+            font-family: Arial;
+            background: #26292c;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #667eea, #764ba2, #ff758c);
-            background-size: 300% 300%;
-            animation: gradientMove 8s ease infinite;
+            min-height: 100vh;
         }
 
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .login-box {
-            width: 350px;
-            padding: 35px;
+        .container {
             background: white;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            animation: slideUp 1s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            padding: 30px;
+            width: 350px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #aaa;
         }
 
         h2 {
-            color: white;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 25px;
+            text-align: center;
         }
 
         label {
-            display: block;
-            text-align: left;
-            margin-bottom: 8px;
             font-weight: bold;
-            color: #444;
         }
 
         input {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        input:focus {
-            border-color: #764ba2;
-            box-shadow: 0 0 8px rgba(118,75,162,0.4);
+            padding: 10px;
+            margin: 8px 0 15px;
+            box-sizing: border-box;
         }
 
         button {
             width: 100%;
-            padding: 13px;
-            border: none;
-            border-radius: 8px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            padding: 12px;
+            background: #2563eb;
             color: white;
-            font-size: 16px;
-            font-weight: bold;
+            border: none;
             cursor: pointer;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            transform: scale(1.05);
-            background: linear-gradient(90deg, #ff758c, #ff7eb3);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .error {
             color: red;
-            background: #ffe5e5;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 15px;
+        }
+
+        .success {
+            color: green;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="login-box">
+<div class="container">
 
-        <h2>Student Login</h2>
+    <h2>Create Account</h2>
 
-        {% if error %}
+    {% if error %}
         <p class="error">{{ error }}</p>
-        {% endif %}
+    {% endif %}
 
-        <form method="POST">
-            {% csrf_token %}
+    {% if success %}
+        <p class="success">{{ success }}</p>
+    {% endif %}
 
-            <label>Username</label>
-            <input type="text"
-                   name="username"
-                   placeholder="Enter Username"
-                   required>
+    <form method="POST">
 
-            <label>Password</label>
-            <input type="password"
-                   name="password"
-                   placeholder="Enter Password"
-                   required>
+        {% csrf_token %}
 
-            <button type="submit">Login</button>
+        <label>Username</label>
+        <input type="text"
+               name="username"
+               placeholder="Enter username"
+               required>
 
-        </form>
+        <label>Email</label>
+        <input type="email"
+               name="email"
+               placeholder="Enter email"
+               required>
 
-    </div>
+        <label>Password</label>
+        <input type="password"
+               name="password"
+               placeholder="Enter password"
+               required>
+
+        <label>Confirm Password</label>
+        <input type="password"
+               name="confirm_password"
+               placeholder="Confirm password"
+               required>
+
+        <button type="submit">Register</button>
+
+    </form>
+
+</div>
 
 </body>
 </html>
